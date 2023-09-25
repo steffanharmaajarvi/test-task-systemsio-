@@ -17,10 +17,13 @@ class Coupon
     #[ORM\Column]
     private int $id;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, name: 'type')]
     private CouponTypeEnum $type;
 
-    #[ORM\Column(type: 'float')]
+    #[ORM\Column(length: 255, name: 'code')]
+    private string $code;
+
+    #[ORM\Column(type: 'float', name: 'amount')]
     private float $amount;
 
     public function getId(): int
@@ -50,5 +53,26 @@ class Coupon
         $this->amount = $amount;
 
         return $this;
+    }
+
+    public function getCode(): string
+    {
+        return $this->code;
+    }
+
+    public function setCode($code): self
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    public function getDiscountedPrice(float $price): float
+    {
+        if (self::getType() === CouponTypeEnum::AMOUNT_PERCENT) {
+            return $price * ((100-$this->amount)/100);
+        } else {
+            return $price - $this->amount;
+        }
     }
 }

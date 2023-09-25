@@ -15,24 +15,13 @@ security:
             security: false
         main:
             pattern: ^/
-            provider: jwt
-            stateless: true
-            jwt: ~
+            security: false
             # switch_user: true
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-         - { path: ^/login, roles: PUBLIC_ACCESS }
-         - { path: ^/answer, roles: PUBLIC_ACCESS }
-         - { path: ^/single/, roles: PUBLIC_ACCESS }
-         - { path: ^/all/, roles: PUBLIC_ACCESS }
-         - { path: ^/call, roles: PUBLIC_ACCESS }
-         - { path: ^/twiml, roles: PUBLIC_ACCESS }
-         - { path: ^/callback, roles: PUBLIC_ACCESS }
-         - { path: ^/verify, roles: PUBLIC_ACCESS }
-         - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
-         - { path: ^/profile, roles: IS_AUTHENTICATED_FULLY }
+         - { path: ^/, roles: PUBLIC_ACCESS }
 
 when@test:
     security:

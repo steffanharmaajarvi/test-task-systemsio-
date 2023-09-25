@@ -17,14 +17,15 @@ class Product
     #[ORM\Column]
     private int $id;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, name: 'title')]
     private string $title;
 
-    #[ORM\Column(type: 'float')]
+    #[ORM\Column(type: 'float', name: 'price')]
     private float $price;
 
-    #[ORM\Column(type: 'currency')]
-    private CurrencyEnum $currency;
+    #[ORM\Column(name: 'currency', type: 'string')]
+    /** @type CurrencyEnum $currrency */
+    private $currency;
 
     public function getId(): int
     {
